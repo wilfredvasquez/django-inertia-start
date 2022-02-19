@@ -1,0 +1,19 @@
+
+{% load render_bundle from webpack_loader %}
+{% load js_routes_tags %}
+<!DOCTYPE html>
+<html  class="h-full bg-gray-200">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+
+    {% js_routes routes_only=True %}
+    {% render_bundle 'main' 'css' %}
+  </head>
+  <body class="font-sans leading-none text-gray-700 antialiased">
+    {% csrf_token %}
+    {{ page|json_script:"page" }}
+    <div id="app"></div>
+    {% render_bundle 'main' 'js' %}
+  </body>
+</html>
